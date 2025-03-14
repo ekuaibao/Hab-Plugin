@@ -1,4 +1,4 @@
-package com.hosecloud.hab.plugin.example;
+package com.hosecloud.hab.plugin;
 
 import com.hosecloud.hab.plugin.annotation.JsonSchemaProperty;
 import lombok.Data;

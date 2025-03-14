@@ -1,14 +1,11 @@
 package com.hosecloud.hab.plugin;
 
-import com.hosecloud.hab.plugin.model.Log;
-import com.hosecloud.hab.plugin.model.OpenApiDocument;
-import com.hosecloud.hab.plugin.util.OpenApiGenerator;
-import com.hosecloud.hab.plugin.util.PluginExecutor;
 import com.hosecloud.hab.plugin.cache.CacheService;
+import com.hosecloud.hab.plugin.model.Log;
+import org.apache.http.client.HttpClient;
 import org.pf4j.ExtensionPoint;
 
 import java.lang.reflect.Field;
-import org.apache.http.client.HttpClient;
 import java.util.List;
 import java.util.Map;
 
@@ -64,17 +61,6 @@ public interface TaskPluginInterface extends ExtensionPoint {
     List<Log> getExecuteLogs();
 
     /**
-     * 获取插件的OpenAPI文档
-     * 默认实现会根据实现类中的字段和注解自动生成OpenAPI文档
-     * 子类可以选择性重写此方法，提供自定义的OpenAPI文档
-     *
-     * @return OpenAPI文档对象
-     */
-    default OpenApiDocument getOpenApi() {
-        return OpenApiGenerator.generateOpenApi(this);
-    }
-
-    /**
      * 设置插件参数
      *
      * @param parameters 参数Map
@@ -90,7 +76,7 @@ public interface TaskPluginInterface extends ExtensionPoint {
             } catch (NoSuchFieldException e) {
                 // 忽略不存在的字段
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
     }

@@ -1,0 +1,28 @@
+# Maven 构建目录
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+
+# 编译文件
+*.class
+
+# 日志文件
+*.log
+
+# 包文件
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+# IDE 文件
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# Mac OS 文件
+.DS_Store

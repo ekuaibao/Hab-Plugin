@@ -1,16 +1,11 @@
 package com.hosecloud.hab.plugin;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hosecloud.hab.plugin.annotation.Execute;
 import com.hosecloud.hab.plugin.annotation.JsonSchemaDefinition;
 import com.hosecloud.hab.plugin.annotation.JsonSchemaProperty;
 import com.hosecloud.hab.plugin.annotation.JsonSchemaResult;
-import com.hosecloud.hab.plugin.model.Log;
 import com.hosecloud.hab.plugin.cache.CacheService;
-import com.hosecloud.hab.plugin.example.ExampleResult;
-import com.hosecloud.hab.plugin.example.ExampleResultItem;
-import com.hosecloud.hab.plugin.model.OpenApiDocument;
+import com.hosecloud.hab.plugin.model.Log;
 import org.junit.jupiter.api.Assertions;
 import org.pf4j.Extension;
 
@@ -126,7 +121,7 @@ public class ExamplePlugin extends BaseTaskPlugin {
     /**
      * 测试方法，用于生成并打印JSON Schema和OpenAPI文档
      */
-    public static void main(String[] args) throws JsonProcessingException {
+    public static void main(String[] args) {
         ExamplePlugin plugin = new ExamplePlugin();
         plugin.setCacheService(new CacheService() {
             Map<String, String> cache = new HashMap<>();
@@ -140,11 +135,6 @@ public class ExamplePlugin extends BaseTaskPlugin {
                 cache.put(key, value);
             }
         });
-        ObjectMapper mapper = new ObjectMapper();
-        
-        System.out.println("\n=== OpenAPI ===");
-        OpenApiDocument openApi = plugin.getOpenApi();
-        System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(openApi));
         plugin.execute();
         System.out.println(plugin.getExecuteLogs());;
     }

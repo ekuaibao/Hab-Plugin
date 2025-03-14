@@ -1,6 +1,5 @@
-package com.hosecloud.hab.plugin.util;
+package com.hosecloud.hab.plugin;
 
-import com.hosecloud.hab.plugin.TaskPluginInterface;
 import com.hosecloud.hab.plugin.annotation.Execute;
 
 import java.lang.reflect.InvocationTargetException;
