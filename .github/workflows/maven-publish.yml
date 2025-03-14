@@ -1,4 +1,4 @@
- name: Maven Central Publish
+name: Maven Central Publish
 
 on:
   release:
