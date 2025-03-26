@@ -4,6 +4,7 @@ import com.hosecloud.hab.plugin.annotation.Execute;
 import com.hosecloud.hab.plugin.annotation.JsonSchemaDefinition;
 import com.hosecloud.hab.plugin.annotation.JsonSchemaProperty;
 import com.hosecloud.hab.plugin.annotation.JsonSchemaResult;
+import com.hosecloud.hab.plugin.api.HoseHttpService;
 import com.hosecloud.hab.plugin.cache.CacheService;
 import com.hosecloud.hab.plugin.model.Log;
 import org.junit.jupiter.api.Assertions;
@@ -70,7 +71,12 @@ public class ExamplePlugin extends BaseTaskPlugin {
     public String getName() {
         return "ExamplePlugin";
     }
-    
+
+    @Override
+    public void setHoseHttpService(HoseHttpService httpService) {
+
+    }
+
     /**
      * 使用@Execute注解标记的方法将作为插件的执行入口
      * 方法名可以自定义，不必是execute
