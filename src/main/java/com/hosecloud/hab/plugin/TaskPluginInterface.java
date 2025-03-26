@@ -1,5 +1,6 @@
 package com.hosecloud.hab.plugin;
 
+import com.hosecloud.hab.plugin.api.HoseHttpService;
 import com.hosecloud.hab.plugin.cache.CacheService;
 import com.hosecloud.hab.plugin.model.Log;
 import org.apache.http.client.HttpClient;
@@ -52,6 +53,12 @@ public interface TaskPluginInterface extends ExtensionPoint {
      * @param httpClient HTTP服务
      */
     void setHttpClient(HttpClient httpClient);
+
+    /**
+     * 设置Hose HTTP服务
+     * @param httpService Hose HTTP服务
+     */
+    void setHoseHttpService(HoseHttpService httpService);
 
     /**
      * 获取插件执行日志
