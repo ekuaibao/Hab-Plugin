@@ -80,6 +80,106 @@ mvn clean package
 - 对于开发版本，使用`-SNAPSHOT`后缀，例如`1.0-SNAPSHOT`
 - 对于正式版本，移除`-SNAPSHOT`后缀，例如`1.0`
 
+## 发布到Maven中央仓库
+
+### 准备工作
+
+1. 确保已安装以下工具：
+   - Python 3.x
+   - Maven
+   - GPG (用于签名)
+   - zip (用于打包)
+
+2. 确保已配置GPG密钥并上传到公钥服务器
+
+### 使用打包脚本
+
+项目提供了一个Python脚本 `create-bundle.py` 用于创建Maven中央仓库所需的发布包。
+
+#### 脚本功能
+
+- 清理并构建项目
+- 创建符合Maven中央仓库要求的目录结构
+- 复制所需文件（jar、源码、文档、pom）
+- 生成MD5和SHA1校验和
+- 生成GPG签名
+- 打包成zip文件
+
+#### 使用方法
+
+1. 确保脚本有执行权限：
+```bash
+chmod +x create-bundle.py
+```
+
+2. 运行脚本：
+
+基本用法（使用pom.xml中的版本号）：
+```bash
+./create-bundle.py
+```
+
+指定版本号（必须与pom.xml中的版本号匹配）：
+```bash
+./create-bundle.py --version 1.1.0
+```
+
+完整参数说明：
+```bash
+./create-bundle.py --version 1.1.0 --group-id com.hosecloud.hab --artifact-id plugin
+```
+
+或使用简写形式：
+```bash
+./create-bundle.py -v 1.1.0 -g com.hosecloud.hab -a plugin
+```
+
+可用参数：
+- `--version`, `-v`: 版本号（可选，默认使用pom.xml中的版本号）
+- `--group-id`, `-g`: Group ID（默认：com.hosecloud.hab）
+- `--artifact-id`, `-a`: Artifact ID（默认：plugin）
+
+注意：如果指定了`--version`参数，其值必须与pom.xml中的版本号匹配，否则脚本将报错。建议在更新版本时，先修改pom.xml中的版本号，然后运行脚本时不指定版本号参数。
+
+3. 脚本执行完成后会生成 `plugin-{version}-bundle.zip` 文件，其中包含：
+   - 主jar包
+   - 源码jar包
+   - javadoc jar包
+   - pom文件
+   - 所有文件的MD5和SHA1校验和
+   - 所有文件的GPG签名
+
+#### 自定义配置
+
+脚本支持通过命令行参数自定义配置，无需修改代码。所有参数都有默认值，可以根据需要覆盖：
+
+```bash
+# 示例：使用pom.xml中的版本号
+./create-bundle.py
+
+# 示例：指定版本号（必须与pom.xml匹配）
+./create-bundle.py --version 1.1.0
+
+# 示例：完全自定义
+./create-bundle.py --version 1.1.0 --group-id com.example --artifact-id custom-plugin
+```
+
+### 故障排除
+
+如果遇到以下问题：
+
+1. GPG签名失败
+   - 确保已正确配置GPG密钥
+   - 确保GPG密钥未过期
+
+2. 校验和不匹配
+   - 脚本使用Python的hashlib库生成标准的MD5和SHA1校验和
+   - 确保文件在生成校验和时未被修改
+
+3. 目录结构错误
+   - 检查生成的zip文件内容是否符合Maven中央仓库的要求
+   - 确保所有必需的文件都已包含
+
 ## 使用示例
 
 ### 创建一个简单的插件

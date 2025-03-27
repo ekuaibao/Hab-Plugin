@@ -27,3 +27,4 @@ pom.xml.releaseBackup
 # Mac OS 文件
 .DS_Store
 /.m2/
+bundle/
