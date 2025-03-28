@@ -91,13 +91,13 @@ public @interface JsonSchemaProperty {
     String defaultValue() default "";
 
     /**
-     * 枚举值列表（JSON字符串数组格式）
+     * 枚举值列表
      * 用于定义字段的可选值列表
-     * 例如：["选项1", "选项2", "选项3"]
+     * 例如：@EnumValue(label = "启用", value = "enabled")
      *
      * @return 枚举值列表
      */
-    String[] enumValues() default {};
+    EnumValue[] enumValues() default {};
 
     /**
      * 自定义Formily样式（JSON字符串格式）

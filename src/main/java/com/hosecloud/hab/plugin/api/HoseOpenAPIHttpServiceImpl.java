@@ -1,6 +1,5 @@
 package com.hosecloud.hab.plugin.api;
 
-import lombok.RequiredArgsConstructor;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -22,12 +21,18 @@ import java.util.stream.Collectors;
 /**
  * 该类仅用于本地测试，实际生产中请使用HoseHttpService
  */
-@RequiredArgsConstructor
 public class HoseOpenAPIHttpServiceImpl implements HoseHttpService {
     private final String baseUrl;
     private final String appKey;
     private final String appSecurity;
     private final HttpClient httpClient;
+
+    public HoseOpenAPIHttpServiceImpl(String baseUrl, String appKey, String appSecurity, HttpClient httpClient) {
+        this.baseUrl = baseUrl;
+        this.appKey = appKey;
+        this.appSecurity = appSecurity;
+        this.httpClient = httpClient;
+    }
 
     @Override
     public <T> T doSend(String path, String method, List<Map<String, Object>> queryParams, List<Map<String, Object>> header, Map<String, Object> body, Class<T> aClass) {

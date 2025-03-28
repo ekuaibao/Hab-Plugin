@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.hosecloud.hab</groupId>
     <artifactId>plugin</artifactId>
-    <version>1.1.2</version>
+    <version>1.5.7</version>
     <packaging>jar</packaging>
     <name>HoseCloud Hab Plugin</name>
     <description>Plugin framework for HoseCloud Hab</description>
@@ -32,12 +32,6 @@
     </scm>
     
     <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.36</version>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -72,16 +66,18 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
+
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>releases</id>
+            <name>Releases Repository</name>
+            <url>https://repo.ekuaibao.com/repository/ekuaibao-maven-releases/</url>
         </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Snapshots Repository</name>
+            <url>https://repo.ekuaibao.com/repository/ekuaibao-maven-snapshots/</url>
+        </snapshotRepository>
     </distributionManagement>
     
     <build>
@@ -125,17 +121,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.13</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
             </plugin>
         </plugins>
     </build>

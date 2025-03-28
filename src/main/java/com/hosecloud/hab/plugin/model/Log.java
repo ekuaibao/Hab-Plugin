@@ -1,13 +1,8 @@
 package com.hosecloud.hab.plugin.model;
 
-import lombok.Getter;
-import lombok.ToString;
-
 /**
  * 表示带有级别的日志
  */
-@Getter
-@ToString
 public class Log {
     /**
      * -- GETTER --
@@ -63,5 +58,21 @@ public class Log {
      */
     public static Log info(String message) {
         return new Log(message, LogLevel.INFO);
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public LogLevel getLevel() {
+        return level;
+    }
+
+    @Override
+    public String toString() {
+        return "Log{" +
+                "message='" + message + '\'' +
+                ", level=" + level +
+                '}';
     }
 }

@@ -1,12 +1,12 @@
 package com.hosecloud.hab.plugin;
 
 import com.hosecloud.hab.plugin.annotation.JsonSchemaProperty;
-import lombok.Data;
+
+import java.util.List;
 
 /**
  * 示例插件的返回值类型
  */
-@Data
 public class ExampleResult {
     
     @JsonSchemaProperty(
@@ -42,4 +42,55 @@ public class ExampleResult {
         description = "查询结果的数据列表"
     )
     private java.util.List<ExampleResultItem> items;
-} 
+
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
+    public List<ExampleResultItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ExampleResultItem> items) {
+        this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return "ExampleResult{" +
+                "success=" + success +
+                ", code=" + code +
+                ", message='" + message + '\'' +
+                ", total=" + total +
+                ", items=" + items +
+                '}';
+    }
+}
