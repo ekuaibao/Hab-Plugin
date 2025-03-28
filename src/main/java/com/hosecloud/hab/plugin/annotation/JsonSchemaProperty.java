@@ -89,4 +89,23 @@ public @interface JsonSchemaProperty {
      * @return 默认值
      */
     String defaultValue() default "";
+
+    /**
+     * 枚举值列表（JSON字符串数组格式）
+     * 用于定义字段的可选值列表
+     * 例如：["选项1", "选项2", "选项3"]
+     *
+     * @return 枚举值列表
+     */
+    String[] enumValues() default {};
+
+    /**
+     * 自定义Formily样式（JSON字符串格式）
+     * 用于定义字段在Formily中的自定义样式
+     * 如果设置了此属性，将优先使用此样式配置
+     * 例如：{"width": "100%", "marginBottom": "10px"}
+     *
+     * @return 自定义Formily样式
+     */
+    String formilyStyle() default "";
 }
