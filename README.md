@@ -180,6 +180,8 @@ chmod +x create-bundle.py
    - 检查生成的zip文件内容是否符合Maven中央仓库的要求
    - 确保所有必需的文件都已包含
 
+打包后在 [sonatype](https://central.sonatype.com/publishing) 发布
+
 ## 使用示例
 
 ### 创建一个简单的插件
