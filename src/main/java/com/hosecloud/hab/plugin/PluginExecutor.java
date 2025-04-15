@@ -1,6 +1,7 @@
 package com.hosecloud.hab.plugin;
 
 import com.hosecloud.hab.plugin.annotation.Execute;
+import com.hosecloud.hab.plugin.exception.PluginException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -37,7 +38,7 @@ public final class PluginExecutor {
                 Method method = executeMethod.get();
                 return method.invoke(plugin);
             } catch (IllegalAccessException | InvocationTargetException e) {
-                throw new IllegalStateException("执行插件方法时出错: " + e.getMessage(), e);
+                throw new PluginException("执行插件方法时出错: " + e.getMessage(), e);
             }
         } else {
             // 如果没有找到带有@Execute注解的方法，则尝试调用execute方法（向后兼容）
@@ -45,7 +46,7 @@ public final class PluginExecutor {
                 Method legacyExecuteMethod = pluginClass.getMethod("execute");
                 return legacyExecuteMethod.invoke(plugin);
             } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                throw new IllegalStateException("插件没有定义带有@Execute注解的方法，也没有实现execute方法", e);
+                throw new PluginException("插件没有定义带有@Execute注解的方法，也没有实现execute方法", e);
             }
         }
     }

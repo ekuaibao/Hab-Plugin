@@ -2,6 +2,7 @@ package com.hosecloud.hab.plugin;
 
 import com.hosecloud.hab.plugin.api.HoseHttpService;
 import com.hosecloud.hab.plugin.cache.CacheService;
+import com.hosecloud.hab.plugin.exception.PluginException;
 import com.hosecloud.hab.plugin.model.Log;
 import org.apache.http.client.HttpClient;
 import org.pf4j.ExtensionPoint;
@@ -83,7 +84,7 @@ public interface TaskPluginInterface extends ExtensionPoint {
             } catch (NoSuchFieldException e) {
                 // 忽略不存在的字段
             } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
+                throw new PluginException("设置参数异常", e);
             }
         }
     }
