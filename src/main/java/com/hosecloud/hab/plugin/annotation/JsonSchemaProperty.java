@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.hosecloud.hab.plugin.DataType;
+
 /**
  * 用于标记需要生成JSON Schema的字段
  * 该注解可以用于TaskPluginInterface的实现类中的字段
@@ -108,4 +110,7 @@ public @interface JsonSchemaProperty {
      * @return 自定义Formily样式
      */
     String formilyStyle() default "";
+
+    DataType dataType() default DataType.UNDEFINED;
+
 }
